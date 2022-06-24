@@ -76,6 +76,38 @@ namespace AddressBookSystem
                 Console.WriteLine("-------\nError:Records are not updated.\n-----");
             }
         }
+
+        //Delete record from table
+        public void DeleteRecord()
+
+        {
+
+            SqlConnection connect = new SqlConnection(dbpath);
+
+            using (connect)
+
+            {
+
+                connect.Open();
+
+                Console.WriteLine("Enter name of person to  delete from records:");
+
+                string name = Console.ReadLine();
+
+                string query = "delete from Address_Book where FirstName='" + name + "'"; ;
+
+                SqlCommand command = new SqlCommand(query, connect);
+
+                command.ExecuteNonQuery();
+
+                connect.Close();
+
+            }
+
+
+
+
+        }
     }
 }
 
