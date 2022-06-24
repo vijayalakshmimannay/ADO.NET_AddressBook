@@ -4,10 +4,12 @@ using System.Data.SqlClient;
 
 namespace AddressBookSystem
 {
-    internal class AddressBook
+    public class AddressBook
     {
         public static string dbpath = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=AddressBook;";
         SqlConnection connect = new SqlConnection(dbpath);
+
+        //retrieve data from table
         public void GetAddressbook()
         {
 
@@ -47,6 +49,32 @@ namespace AddressBookSystem
 
             }
             connect.Close();
+        }
+
+
+        //Update table record
+        public void UpdateRecord()
+        {
+            SqlConnection connect = new SqlConnection(dbpath);
+            try
+            {
+                using (connect)
+                {
+                    Console.WriteLine("Enter name of Person:");
+                    string name = Console.ReadLine();
+                    Console.WriteLine("Enter phoneno to update:");
+                    string phone = Console.ReadLine();
+                    connect.Open();
+                    string query = "update Address_Book set PHONENO =" + phone + "where FIRSTNAME='" + name + "'";
+                    SqlCommand command = new SqlCommand(query, connect);
+                    command.ExecuteNonQuery();
+                    Console.WriteLine("Records updated successfully.");
+                }
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("-------\nError:Records are not updated.\n-----");
+            }
         }
     }
 }

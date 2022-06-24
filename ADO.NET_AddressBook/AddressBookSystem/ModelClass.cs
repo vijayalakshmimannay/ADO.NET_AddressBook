@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AddressBookSystem
 {
-    internal class ModelClass
+    public class ModelClass
     {
         public int ID { get; set; }
         public string NAME { get; set; }
