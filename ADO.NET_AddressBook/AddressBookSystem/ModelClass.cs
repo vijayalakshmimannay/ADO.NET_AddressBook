@@ -10,9 +10,9 @@ namespace AddressBookSystem
     public class ModelClass
     {
         public int ID { get; set; }
-        public string NAME { get; set; }
+        public string FIRSTNAME { get; set; }
         public string LASTNAME { get; set; }
-        public string ADDRESS { get; set; }
+        public string ADDRESSs { get; set; }
         public string CITY { get; set; }
         public string STATE { get; set; }
         public string ZIP { get; set; }

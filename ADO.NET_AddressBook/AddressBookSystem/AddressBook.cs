@@ -1,25 +1,24 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace AddressBookSystem
 {
     public class AddressBook
     {
-        public static string dbpath = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=AddressBook;";
+        public static string dbpath = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=AddressBook";
         SqlConnection connect = new SqlConnection(dbpath);
 
         //retrieve data from table
-        public void GetAddressbook()
+        /*public void GetAddressbook()
         {
-
             AddressBookSystem.ModelClass model = new AddressBookSystem.ModelClass();
             SqlConnection connect = new SqlConnection(dbpath);
             using (connect)
             {
                 connect.Open();
                 string query = "Select * from Address_Book";
-
                 SqlCommand command = new SqlCommand(query, connect);
                 SqlDataReader reader = command.ExecuteReader();
                 if (reader.HasRows)
@@ -46,9 +45,47 @@ namespace AddressBookSystem
                     Console.WriteLine("Records not found in Database");
                 }
                 reader.Close();
-
             }
             connect.Close();
+        }*/
+
+        public void CreateNewContact()
+        {
+            SqlConnection connect = new SqlConnection(dbpath);
+            using (connect)
+            {
+                connect.Open();
+                AddressBookSystem.ModelClass model = new AddressBookSystem.ModelClass();
+                Console.WriteLine("Enter First Name");
+                model.FIRSTNAME = Console.ReadLine();
+                Console.WriteLine("Enter Last Name");
+                model.LASTNAME = Console.ReadLine();
+                Console.WriteLine("Enter Address ");
+                model.ADDRESSs = Console.ReadLine();
+                Console.WriteLine("Enter City ");
+                model.CITY = Console.ReadLine();
+                Console.WriteLine("Enter State ");
+                model.STATE = Console.ReadLine();
+                Console.WriteLine("Enter Zip Code ");
+                model.ZIP = Console.ReadLine();
+                Console.WriteLine("Enter Phone ");
+                model.PHONENO = Console.ReadLine();
+                Console.WriteLine("Enter Email ");
+                model.EMAIL = Console.ReadLine();
+                SqlCommand sql = new SqlCommand("SPAddress_Book", connect);
+                sql.CommandType = CommandType.StoredProcedure;
+                sql.Parameters.AddWithValue("@FIRSTNAME", model.FIRSTNAME);
+                sql.Parameters.AddWithValue("@LASTNAME", model.LASTNAME);
+                sql.Parameters.AddWithValue("@ADDRESSs", model.ADDRESSs);
+                sql.Parameters.AddWithValue("@CITY", model.CITY);
+                sql.Parameters.AddWithValue("@STATE", model.STATE);
+                sql.Parameters.AddWithValue("@ZIP", model.ZIP);
+                sql.Parameters.AddWithValue("@PHONENO", model.PHONENO);
+                sql.Parameters.AddWithValue("@EMAIL", model.EMAIL);
+                sql.ExecuteNonQuery();
+                Console.WriteLine("Record created successfully.");
+                connect.Close();
+            }
         }
 
 
@@ -76,40 +113,6 @@ namespace AddressBookSystem
                 Console.WriteLine("-------\nError:Records are not updated.\n-----");
             }
         }
-
-        //Delete record from table
-        public void DeleteRecord()
-
-        {
-
-            SqlConnection connect = new SqlConnection(dbpath);
-
-            using (connect)
-
-            {
-
-                connect.Open();
-
-                Console.WriteLine("Enter name of person to  delete from records:");
-
-                string name = Console.ReadLine();
-
-                string query = "delete from Address_Book where FirstName='" + name + "'"; ;
-
-                SqlCommand command = new SqlCommand(query, connect);
-
-                command.ExecuteNonQuery();
-
-                connect.Close();
-
-            }
-
-
-
-
-        }
     }
+
 }
-
-
-      
