@@ -9,7 +9,8 @@ namespace AddressBookSystem
             AddressBookSystem.AddressBook contact = new AddressBookSystem.AddressBook();
             //contact.GetAddressbook();
             //contact.CreateNewContact();
-            contact.UpdateRecord();
+            //contact.UpdateRecord();
+            contact.DeleteRecord();
 
         }
     }
