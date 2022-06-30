@@ -10,7 +10,7 @@ namespace AddressBookSystem
             //contact.GetAddressbook();
             //contact.CreateNewContact();
             //contact.UpdateRecord();
-            //contact.DeleteRecord();
+          
 
             List<ModelClass> list = new List<ModelClass>();
             Console.WriteLine("Enter number of contacts to Add");
